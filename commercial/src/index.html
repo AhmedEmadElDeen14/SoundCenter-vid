@@ -1,0 +1,192 @@
+<!doctype html>
+<html lang="ar">
+<head>
+<meta charset="utf-8">
+<title>Sound Center — Commercial</title>
+<style>
+@font-face{font-family:Cairo;font-weight:400;src:url(../assets/fonts/cairo-arabic-400-normal.woff2);unicode-range:U+0600-06FF,U+0750-077F,U+08A0-08FF,U+FB50-FDFF,U+FE70-FEFF}
+@font-face{font-family:Cairo;font-weight:700;src:url(../assets/fonts/cairo-arabic-700-normal.woff2);unicode-range:U+0600-06FF,U+0750-077F,U+08A0-08FF,U+FB50-FDFF,U+FE70-FEFF}
+@font-face{font-family:Cairo;font-weight:900;src:url(../assets/fonts/cairo-arabic-900-normal.woff2);unicode-range:U+0600-06FF,U+0750-077F,U+08A0-08FF,U+FB50-FDFF,U+FE70-FEFF}
+@font-face{font-family:Cairo;font-weight:400;src:url(../assets/fonts/cairo-latin-400-normal.woff2);unicode-range:U+0000-00FF}
+@font-face{font-family:Cairo;font-weight:700;src:url(../assets/fonts/cairo-latin-700-normal.woff2);unicode-range:U+0000-00FF}
+@font-face{font-family:Cairo;font-weight:900;src:url(../assets/fonts/cairo-latin-900-normal.woff2);unicode-range:U+0000-00FF}
+@font-face{font-family:Montserrat;font-weight:500;src:url(../assets/fonts/montserrat-latin-500-normal.woff2)}
+@font-face{font-family:Montserrat;font-weight:700;src:url(../assets/fonts/montserrat-latin-700-normal.woff2)}
+@font-face{font-family:Montserrat;font-weight:800;src:url(../assets/fonts/montserrat-latin-800-normal.woff2)}
+@font-face{font-family:Montserrat;font-weight:900;src:url(../assets/fonts/montserrat-latin-900-normal.woff2)}
+:root{--red:#CE1E20;--black:#111111;--white:#FFFFFF}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{background:#000;width:1080px;height:1920px;overflow:hidden}
+#stage{position:relative;width:1080px;height:1920px;overflow:hidden;background:var(--black);color:var(--white)}
+.abs{position:absolute;left:0;width:1080px;text-align:center}
+.ar{font-family:Cairo,sans-serif;direction:rtl;font-weight:900;line-height:1.18}
+.en{font-family:Montserrat,sans-serif;font-weight:800;text-transform:uppercase}
+.scene{position:absolute;inset:0;visibility:hidden}
+.mask{overflow:hidden;padding:6px 0 14px;margin:-6px 0 -14px}
+.mask>span{display:block;will-change:transform}
+.red{color:var(--red)}
+.tag{font-family:Montserrat;font-weight:700;font-size:26px;letter-spacing:9px;text-transform:uppercase;color:rgba(255,255,255,.72)}
+.tagR{color:var(--red)}
+#bus{position:absolute;inset:0}
+#spot{position:absolute;inset:0;background:radial-gradient(ellipse 760px 900px at 50% 18%,rgba(255,255,255,.20),rgba(255,255,255,0) 70%)}
+#vig{position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse at 50% 50%,rgba(0,0,0,0) 45%,rgba(0,0,0,.62) 100%)}
+#grain{position:absolute;inset:0;width:1080px;height:1920px;pointer-events:none;mix-blend-mode:overlay;opacity:.5}
+.hair{position:absolute;background:rgba(255,255,255,.14)}
+/* product stage */
+#prodWrap{position:absolute;left:110px;top:430px;width:860px;height:645px;perspective:1700px}
+.prod{position:absolute;inset:0;transform-style:preserve-3d}
+.prod svg{width:860px;height:645px;overflow:visible}
+.card{position:absolute;width:440px;height:384px;border:1.5px solid rgba(255,255,255,.16);background:linear-gradient(160deg,rgba(255,255,255,.08),rgba(255,255,255,.015));border-radius:18px;overflow:hidden}
+.card svg{position:absolute;left:0;top:6px;width:440px;height:330px;overflow:visible}
+.card .cl{position:absolute;left:0;right:0;bottom:16px;text-align:center}
+.card .cl .en{font-size:22px;letter-spacing:3px;color:rgba(255,255,255,.65)}
+.card .cl .ar{font-size:36px;font-weight:700}
+.card:before{content:"";position:absolute;left:0;top:0;width:54px;height:5px;background:var(--red)}
+/* previous work */
+.plate{position:absolute;background:#fff;border-radius:20px;overflow:hidden;box-shadow:0 30px 60px rgba(0,0,0,.55)}
+.plate:before{content:"";position:absolute;left:0;top:0;width:90px;height:7px;background:var(--red)}
+.plate img{position:absolute;object-fit:contain}
+/* lockup */
+.phone{position:absolute;left:150px;width:780px;height:110px;border-radius:14px;background:rgba(255,255,255,.07);border:1.5px solid rgba(255,255,255,.2);overflow:hidden;direction:ltr}
+.phone i{position:absolute;left:0;top:0;bottom:0;width:110px;background:var(--red)}
+.phone b{position:absolute;left:150px;top:0;line-height:110px;font-family:Montserrat;font-weight:800;font-size:60px;letter-spacing:5px}
+</style>
+</head>
+<body>
+<div id="stage">
+  <canvas id="bus" width="1080" height="1920"></canvas>
+  <div id="spot"></div>
+
+  <!-- A · HOOK -->
+  <div class="scene" id="sA">
+    <div class="abs" id="aQ" style="top:1210px">
+      <div class="mask"><span class="ar" id="aQt" style="font-size:150px">أتوبيسات شغّالة؟</span></div>
+      <div id="aQbar" style="margin:18px auto 0;height:10px;width:300px;background:var(--red);transform-origin:right"></div>
+    </div>
+    <div class="abs" id="aOne" style="top:1090px">
+      <div class="tag tagR" id="aOneTag" style="margin-bottom:14px">One source</div>
+      <div class="mask"><span class="ar" id="aOneT" style="font-size:215px;line-height:1.05;white-space:nowrap">مصدر واحد</span></div>
+      <div class="mask" style="margin-top:12px"><span class="ar" id="aOneS" style="font-size:60px;font-weight:700;color:rgba(255,255,255,.92)">لأنظمة الصوت والصورة بالكامل</span></div>
+    </div>
+  </div>
+
+  <!-- B · LOGO STING -->
+  <div class="scene" id="sB" style="background:#111">
+    <div id="bGlow" style="position:absolute;left:140px;top:420px;width:800px;height:800px;border-radius:50%;background:radial-gradient(circle,rgba(206,30,32,.55),rgba(206,30,32,0) 65%)"></div>
+    <svg id="bRing" width="1080" height="1920" style="position:absolute;left:0;top:0"><circle id="bR1" cx="540" cy="780" r="200" fill="none" stroke="#CE1E20" stroke-width="6"/><circle id="bR2" cx="540" cy="780" r="200" fill="none" stroke="#fff" stroke-width="2"/></svg>
+    <img id="bLogo" src="../assets/sc_logo.png" style="position:absolute;left:290px;top:480px;width:500px">
+    <div class="abs" id="bName" style="top:1100px"><div class="mask"><span class="en" id="bNameT" style="font-size:84px;font-weight:900;letter-spacing:6px">Sound Center</span></div></div>
+    <div class="abs" id="bTag" style="top:1210px"><span class="tag" style="font-size:28px">Audio &amp; Video Solutions</span></div>
+  </div>
+
+  <!-- C · PRODUCTS -->
+  <div class="scene" id="sC" style="background:#111">
+    <div id="cGhost" class="en" style="position:absolute;left:30px;top:200px;font-size:520px;font-weight:900;line-height:1;color:transparent;-webkit-text-stroke:2px rgba(255,255,255,.07)">01</div>
+    <div id="cFloor" style="position:absolute;left:60px;top:1040px;width:960px;height:140px;background:radial-gradient(ellipse at 50% 0%,rgba(255,255,255,.22),rgba(255,255,255,0) 70%)"></div>
+    <div id="prodWrap"></div>
+    <div id="cScan" style="position:absolute;top:-100px;height:2100px;width:46px;background:var(--red);transform:skewX(-14deg)"></div>
+    <div class="abs" id="cLabel" style="top:1190px">
+      <div class="mask"><span class="ar" id="cAr" style="font-size:118px;line-height:1.15"></span></div>
+      <div class="mask" style="margin-top:6px"><span class="en" id="cEn" style="font-size:50px;letter-spacing:7px;color:rgba(255,255,255,.85)"></span></div>
+    </div>
+    <div id="cTicks" style="position:absolute;left:290px;top:1560px;width:500px;height:8px"></div>
+    <div id="cGridWrap" style="position:absolute;inset:0">
+      <div class="abs" style="top:196px"><div class="mask"><span class="ar" id="gT" style="font-size:112px">منتج واحد أو أكثر</span></div>
+        <div class="tag tagR" id="gTag" style="margin-top:10px">One product — or more</div></div>
+      <svg id="gWire" width="1080" height="1920" style="position:absolute;left:0;top:0;overflow:visible"></svg>
+    </div>
+  </div>
+
+  <!-- D · SERVICES -->
+  <div class="scene" id="sD" style="background:#111">
+    <div id="dGrid" style="position:absolute;inset:0;opacity:.5;background-image:linear-gradient(rgba(255,255,255,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.05) 1px,transparent 1px);background-size:60px 60px"></div>
+    <div class="abs" style="top:196px"><div class="tag tagR" id="dTag">Supply · Installation · Maintenance</div></div>
+    <div id="dRows"></div>
+    <div class="abs" id="dTeam" style="top:1340px">
+      <div class="mask"><span class="ar" id="dTeamT" style="font-size:96px">فريق متخصّص</span></div>
+      <div class="tag" id="dTeamE" style="margin-top:6px">Specialised team</div>
+    </div>
+    <div id="dBus" style="position:absolute;left:40px;top:1000px;width:1000px;height:330px"></div>
+  </div>
+
+  <!-- E · WARRANTY -->
+  <div class="scene" id="sE" style="background:#111">
+    <div id="eGlow" style="position:absolute;left:90px;top:230px;width:900px;height:900px;border-radius:50%;background:radial-gradient(circle,rgba(206,30,32,.42),rgba(206,30,32,0) 62%)"></div>
+    <svg id="eShield" width="1080" height="1000" viewBox="0 0 1080 1000" style="position:absolute;left:0;top:210px;overflow:visible"></svg>
+    <div class="abs" style="top:1040px"><div class="mask"><span class="ar" id="eT" style="font-size:230px;line-height:1.05">ضمان</span></div></div>
+    <div id="ePillL" class="abs" style="left:70px;width:450px;top:1330px;text-align:center"></div>
+    <div id="ePillR" class="abs" style="left:560px;width:450px;top:1330px;text-align:center"></div>
+    <div id="eStatus" style="position:absolute;left:70px;top:1500px;width:940px;height:150px"></div>
+  </div>
+
+  <!-- F · PREVIOUS WORK -->
+  <div class="scene" id="sF" style="background:#111">
+    <div id="fGrid" style="position:absolute;inset:0;opacity:.6;background-image:linear-gradient(rgba(255,255,255,.045) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.045) 1px,transparent 1px);background-size:60px 60px"></div>
+    <div class="abs" style="top:196px"><div class="tag tagR" id="fTag">Previous work</div>
+      <div class="mask" style="margin-top:6px"><span class="ar" id="fT" style="font-size:130px">سابقة أعمالنا</span></div></div>
+    <div class="plate" id="pGo" style="left:550px;top:520px;width:440px;height:380px"><img src="../assets/gobus.png" style="left:60px;top:60px;width:320px;height:260px"></div>
+    <div class="plate" id="pBlue" style="left:550px;top:920px;width:440px;height:380px"><img src="../assets/bluebus.png" style="left:40px;top:100px;width:360px;height:130px"></div>
+    <div class="plate" id="pAhly" style="left:90px;top:520px;width:440px;height:780px"><img src="../assets/ahly.png" style="left:50px;top:70px;width:340px;height:640px"></div>
+    <div class="abs" id="fMore" style="top:1370px;left:90px;width:900px;text-align:right">
+      <div id="fBar" style="height:6px;background:var(--red);width:900px;transform-origin:right;margin-bottom:26px"></div>
+      <div class="mask"><span class="ar" id="fMoreT" style="font-size:54px;font-weight:900;white-space:nowrap">شركات في مجال النقل والسياحة</span></div>
+      <div class="tag" id="fMoreE" style="margin-top:8px;text-align:right;letter-spacing:6px;font-size:24px">+ Transportation &amp; Tourism companies</div>
+    </div>
+  </div>
+
+  <!-- G · VALUE -->
+  <div class="scene" id="sG">
+    <div class="abs" style="top:1140px">
+      <div class="tag tagR" id="gvTag" style="margin-bottom:6px">Direct import · Competitive prices</div>
+      <div class="mask"><span class="ar" id="gv1" style="font-size:132px;line-height:1.1;white-space:nowrap">استيراد مباشر</span></div>
+      <div class="mask" style="margin-top:4px;position:relative"><span class="ar" id="gv2" style="font-size:132px;line-height:1.1;white-space:nowrap;color:var(--white)">أسعار تنافسية</span></div>
+      <div id="gvBar" style="margin:12px auto 0;width:360px;height:10px;background:var(--red);transform-origin:right"></div>
+    </div>
+  </div>
+
+  <!-- H · CLIMAX -->
+  <div class="scene" id="sH" style="background:#111">
+    <div id="hGrid" style="position:absolute;inset:0;opacity:.6;background-image:linear-gradient(rgba(255,255,255,.045) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.045) 1px,transparent 1px);background-size:60px 60px"></div>
+    <div id="hGlow" style="position:absolute;left:0;top:600px;width:1080px;height:700px;background:radial-gradient(ellipse at 50% 50%,rgba(206,30,32,.35),rgba(206,30,32,0) 65%)"></div>
+    <div class="abs" style="top:250px">
+      <div class="mask"><span class="ar" id="hT1" style="font-size:132px;line-height:1.1">كل ما تحتاجه</span></div>
+      <div class="mask" style="margin-top:6px"><span class="ar" id="hT2" style="font-size:132px;line-height:1.1;color:var(--red)">في مكان واحد</span></div>
+    </div>
+    <div id="hBus" style="position:absolute;left:40px;top:700px;width:1000px;height:330px"></div>
+    <div id="hSt" style="position:absolute;left:30px;top:1180px;width:1020px;height:320px"></div>
+  </div>
+
+  <!-- I · LOCKUP -->
+  <div class="scene" id="sI" style="background:#111">
+    <div id="iGlow" style="position:absolute;left:40px;top:180px;width:1000px;height:1000px;border-radius:50%;background:radial-gradient(circle,rgba(206,30,32,.38),rgba(206,30,32,0) 60%)"></div>
+    <div id="iFrame" style="position:absolute;left:46px;top:150px;width:988px;height:1620px"></div>
+    <div id="iLogoWrap" style="position:absolute;left:260px;top:265px;width:560px;height:596px;overflow:hidden;border-radius:0 52px 0 52px">
+      <img id="iLogo" src="../assets/sc_logo.png" style="width:560px;display:block">
+      <div id="iShine" style="position:absolute;top:-20px;bottom:-20px;width:120px;background:linear-gradient(90deg,rgba(255,255,255,0),rgba(255,255,255,.55),rgba(255,255,255,0));transform:skewX(-18deg)"></div>
+    </div>
+    <div class="abs" id="iName" style="top:900px"><div class="mask"><span class="en" id="iNameT" style="font-size:96px;font-weight:900;letter-spacing:8px">Sound Center</span></div></div>
+    <div class="abs" id="iSub" style="top:1025px"><span class="en" id="iSubT" style="font-size:31px;font-weight:500;letter-spacing:13px;color:rgba(255,255,255,.88)">Audio &amp; Video Solutions</span></div>
+    <div id="iRule" style="position:absolute;left:340px;top:1100px;width:400px;height:4px;background:var(--red);transform-origin:center"></div>
+    <div class="abs" id="iSvc" style="top:1150px;display:flex;justify-content:center;direction:rtl;gap:0"></div>
+    <div class="phone" id="iP1" style="top:1380px"><i></i><svg width="110" height="110" viewBox="0 0 110 110" style="position:absolute;left:0;top:0"><path d="M40 33 q-6 0 -7 7 q0 22 21 33 q8 5 13 3 l5 -6 q2 -3 -1 -5 l-9 -5 q-3 -1 -5 1 l-3 3 q-9 -5 -12 -14 l3 -3 q2 -2 1 -5 l-4 -9 q-1 -1 -2 -1 Z" fill="#fff" transform="translate(6 4)"/></svg><b>01555700012</b></div>
+    <div class="phone" id="iP2" style="top:1520px"><i></i><svg width="110" height="110" viewBox="0 0 110 110" style="position:absolute;left:0;top:0"><path d="M40 33 q-6 0 -7 7 q0 22 21 33 q8 5 13 3 l5 -6 q2 -3 -1 -5 l-9 -5 q-3 -1 -5 1 l-3 3 q-9 -5 -12 -14 l3 -3 q2 -2 1 -5 l-4 -9 q-1 -1 -2 -1 Z" fill="#fff" transform="translate(6 4)"/></svg><b>01005821389</b></div>
+  </div>
+
+  <!-- HUD -->
+  <div id="hud" style="position:absolute;inset:0;pointer-events:none">
+    <img id="hLogo" src="../assets/sc_logo.png" style="position:absolute;left:60px;top:84px;width:62px">
+    <div id="hSec" class="en" style="position:absolute;right:60px;top:98px;font-size:22px;font-weight:700;letter-spacing:6px;color:rgba(255,255,255,.7)"></div>
+    <div id="hLine" class="hair" style="left:60px;top:168px;width:960px;height:1px"></div>
+    <svg id="wave" width="960" height="100" style="position:absolute;left:60px;top:1760px"></svg>
+  </div>
+
+  <div id="wipe" style="position:absolute;inset:0;pointer-events:none"></div>
+  <div id="vig"></div>
+  <canvas id="grain" width="540" height="960"></canvas>
+</div>
+
+<script src="env.js"></script>
+<script src="products.js"></script>
+<script src="engine.js"></script>
+</body>
+</html>
